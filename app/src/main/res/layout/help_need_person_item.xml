@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_size_8x"
+    android:layout_marginEnd="@dimen/margin_size_8x"
+    android:layout_marginTop="@dimen/margin_size_8x"
+    android:background="@drawable/bg_dark_card"
+    android:padding="@dimen/padding_size_16x"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/help_need_person_item_user_photo_image_view"
+        android:layout_width="@dimen/person_card_photo_size"
+        android:layout_height="@dimen/person_card_photo_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/help_need_person_item_user_name_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_size_16x"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_16x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/help_need_person_item_user_photo_image_view"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Person"
+        />
+
+    <TextView
+        android:id="@+id/help_need_person_item_help_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_size_16x"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_16x"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/help_need_person_item_user_photo_image_view"
+        app:layout_constraintTop_toBottomOf="@id/help_need_person_item_user_name_text_view"
+        tools:text="Fix car"
+        />
+
+    <TextView
+        android:id="@+id/help_need_person_item_desc_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_16x"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_18x"
+        app:layout_constraintEnd_toStartOf="@id/help_need_person_item_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/help_need_person_item_user_photo_image_view"
+        tools:text="Help me"
+        />
+
+    <TextView
+        android:id="@+id/help_need_person_item_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_16x"
+        android:textAlignment="textEnd"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_18x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/help_need_person_item_desc_text_view"
+        app:layout_constraintTop_toBottomOf="@id/help_need_person_item_user_photo_image_view"
+        tools:text="1000 KZT"
+        />
+
+    <Button
+        android:id="@+id/help_need_person_item_help_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_10x"
+        android:text="Help"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/help_need_person_item_user_photo_image_view"
+        app:layout_constraintTop_toBottomOf="@id/help_need_person_item_desc_text_view"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

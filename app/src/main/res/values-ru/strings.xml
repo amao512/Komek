@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Komek</string>
+    <string name="oauth2_web_client_key">258265612240-7lnu07eueotbb8v0mh6bopmkb3eo0v46.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exit_button_string">Выйти</string>
+
+    <string name="menu_item_profile">Профиль</string>
+    <string name="menu_item_main">Главная</string>
+    <string name="menu_item_chat">Сообщение</string>
+
+    <string name="edit_text_label_title_title">Название</string>
+    <string name="edit_text_label_title_desc">Как вам будут помогать?</string>
+    <string name="edit_text_hint_desc">Описание</string>
+    <string name="edit_text_label_title_price">Сколько вы заплатите или бесплатно?</string>
+    <string name="edit_text_hint_price">Цена - Не обязательно</string>
+
+    <string name="button_create">Создать</string>
+
+    <string name="toast_message_empty_fields">Пожалуйста, заполните поля!</string>
+
+    <string name="people_help_you">Эти люди хотят вам помочь!</string>
+    <string name="help_need_people">Этим людям нужна помощь!</string>
+    <string name="help_price_free">Бесплатно</string>
+
+    <string name="text_view_transmission_letter">Сопроводительное письмо</string>
+    <string name="edit_text_hint_write_here">Пишите здесь</string>
+
+    <string name="button_send">Send</string>
+</resources>

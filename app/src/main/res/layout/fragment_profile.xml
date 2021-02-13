@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_size_16x"
+    tools:context=".profile.presentation.ProfileFragment"
+    >
+
+    <ImageView
+        android:id="@+id/fragment_profile_user_photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/fragment_profile_user_full_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_size_10x"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_24x"
+        android:textStyle="bold"
+        tools:text="Name"
+        />
+
+    <TextView
+        android:id="@+id/fragment_profile_user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="@dimen/text_size_16x"
+        tools:text="email@email.com"
+        />
+
+    <TextView
+        android:id="@+id/fragment_profile_user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_size_10x"
+        android:textSize="@dimen/text_size_16x"
+        tools:text="id:123456"
+        />
+
+    <Button
+        android:id="@+id/fragment_profile_exit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/exit_button_string"
+        android:layout_marginTop="@dimen/margin_size_16x"
+        />
+
+</LinearLayout>

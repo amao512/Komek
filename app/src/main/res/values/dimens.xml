@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_16x">16sp</dimen>
+    <dimen name="text_size_18x">18sp</dimen>
+    <dimen name="text_size_24x">24sp</dimen>
+
+    <dimen name="padding_size_16x">16dp</dimen>
+
+    <dimen name="margin_size_8x">8dp</dimen>
+    <dimen name="margin_size_10x">10dp</dimen>
+    <dimen name="margin_size_16x">16dp</dimen>
+
+    <dimen name="card_radius">12dp</dimen>
+    <dimen name="margin_size_1x">1dp</dimen>
+    <dimen name="padding_size_4x">4dp</dimen>
+    <dimen name="person_card_photo_size">60dp</dimen>
+    <dimen name="padding_size_8x">8dp</dimen>
+</resources>

@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Komek</string>
+    <string name="oauth2_web_client_key">258265612240-7lnu07eueotbb8v0mh6bopmkb3eo0v46.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exit_button_string">Exit</string>
+
+    <string name="menu_item_profile">Profile</string>
+    <string name="menu_item_main">Home</string>
+    <string name="menu_item_chat">Chat</string>
+
+    <string name="edit_text_label_title_title">Title</string>
+    <string name="edit_text_label_title_desc">How will they help you?</string>
+    <string name="edit_text_hint_desc">Description</string>
+    <string name="edit_text_label_title_price">How much will you pay or free?</string>
+    <string name="edit_text_hint_price">Price - Not necessary</string>
+
+    <string name="button_create">Create</string>
+
+    <string name="toast_message_empty_fields">Please, fill fields</string>
+
+    <string name="people_help_you">These people want to help you!</string>
+    <string name="help_need_people">These people need help!</string>
+    <string name="help_price_free">free</string>
+
+    <string name="text_view_transmission_letter">Transmission letter</string>
+    <string name="edit_text_hint_write_here">Write here</string>
+
+    <string name="button_send">Send</string>
+</resources>
