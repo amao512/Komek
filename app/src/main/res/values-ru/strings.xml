@@ -27,5 +27,9 @@
     <string name="text_view_transmission_letter">Сопроводительное письмо</string>
     <string name="edit_text_hint_write_here">Пишите здесь</string>
 
-    <string name="button_send">Send</string>
+    <string name="button_send">Отправить</string>
+
+    <string name="button_refuse">Отказаться</string>
+    <string name="button_approve">Принять</string>
+    <string name="text_view_refused">Отказано</string>
 </resources>

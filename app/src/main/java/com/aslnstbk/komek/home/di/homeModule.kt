@@ -17,8 +17,7 @@ val homeModule = module {
     factory {
         DefaultHomeRepository(
             firebaseClient = get(),
-            firebaseDatabase = get(),
-            helpNeedMapper = get()
+            firebaseDatabase = get()
         ) as HomeRepository
     }
 }

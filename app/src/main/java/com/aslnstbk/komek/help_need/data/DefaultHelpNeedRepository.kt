@@ -38,6 +38,7 @@ class DefaultHelpNeedRepository(
 
     override fun onHelp(
         helpNeedId: String,
+        helpName: String,
         transmissionLetter: String,
         onSuccess: () -> Unit,
         onFail: () -> Unit
@@ -45,6 +46,8 @@ class DefaultHelpNeedRepository(
         val currentUser = firebaseAuth.currentUser!!
         val personHelp = PersonHelp(
             id = currentUser.uid,
+            helpNeedId = helpNeedId,
+            helpName = helpName,
             userName = currentUser.displayName ?: EMPTY_STRING,
             userPhoto = currentUser.photoUrl.toString(),
             transmissionLetter = transmissionLetter

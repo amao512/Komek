@@ -5,10 +5,19 @@ import com.aslnstbk.komek.common.data.models.PersonHelp
 
 interface HelpListRepository {
 
-    fun getHelpModelList(): List<PersonHelp>
+    fun getPeopleHelp(
+        onSuccess: (List<PersonHelp>) -> Unit,
+        onFail: () -> Unit
+    )
 
     fun getHelpNeedPeople(
         onSuccess: (List<HelpNeed>) -> Unit,
         onFail: () -> Unit
+    )
+
+    fun changePersonHelpValue(
+        personHelp: PersonHelp,
+        onSuccess: () -> Unit,
+        onFail: () -> Unit,
     )
 }

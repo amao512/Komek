@@ -23,6 +23,26 @@ class HelpListViewModel(
         getHelpMePeople()
     }
 
+    fun onRefuseHelp(personHelp: PersonHelp) {
+        personHelp.isRefuse = true
+
+        helpListRepository.changePersonHelpValue(
+            personHelp = personHelp,
+            onSuccess = {},
+            onFail = {}
+        )
+    }
+
+    fun onApproveHelp(personHelp: PersonHelp) {
+        personHelp.isHelp = true
+
+        helpListRepository.changePersonHelpValue(
+            personHelp = personHelp,
+            onSuccess = {},
+            onFail = {}
+        )
+    }
+
     private fun getHelpNeedPeople() {
         helpListRepository.getHelpNeedPeople(
             onSuccess = {
@@ -34,5 +54,14 @@ class HelpListViewModel(
         )
     }
 
-    private fun getHelpMePeople() {}
+    private fun getHelpMePeople() {
+        helpListRepository.getPeopleHelp(
+            onSuccess = {
+                if (it.isNotEmpty()){
+                    peopleHelpLiveData.value = it
+                }
+            },
+            onFail = {}
+        )
+    }
 }

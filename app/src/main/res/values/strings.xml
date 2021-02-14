@@ -27,4 +27,8 @@
     <string name="edit_text_hint_write_here">Write here</string>
 
     <string name="button_send">Send</string>
+
+    <string name="button_refuse">Refuse</string>
+    <string name="button_approve">Approve</string>
+    <string name="text_view_refused">Refused</string>
 </resources>

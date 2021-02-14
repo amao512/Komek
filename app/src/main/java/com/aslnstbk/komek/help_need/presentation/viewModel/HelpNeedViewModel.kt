@@ -22,10 +22,12 @@ class HelpNeedViewModel(
 
     fun onHelp(
         helpNeedId: String,
+        helpName: String,
         transmissionLetter: String,
     ) {
         helpNeedRepository.onHelp(
             helpNeedId = helpNeedId,
+            helpName = helpName,
             transmissionLetter = transmissionLetter,
             onSuccess = {
                 router.exit()

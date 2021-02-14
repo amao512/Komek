@@ -7,9 +7,8 @@
     tools:context=".home.presentation.HomeFragment"
     >
 
-    <include
-        android:id="@+id/fragment_home_horizontal_help_list"
-        layout="@layout/horizontal_help_list_layout"
+    <FrameLayout
+        android:id="@+id/fragment_home_help_list_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

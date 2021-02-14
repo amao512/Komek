@@ -12,6 +12,7 @@ interface HelpNeedRepository {
 
     fun onHelp(
         helpNeedId: String,
+        helpName: String,
         transmissionLetter: String,
         onSuccess: () -> Unit,
         onFail: () -> Unit

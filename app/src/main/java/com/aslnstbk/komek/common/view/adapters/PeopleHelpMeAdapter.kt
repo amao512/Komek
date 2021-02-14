@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aslnstbk.komek.R
 import com.aslnstbk.komek.common.domain.ImageLoader
 import com.aslnstbk.komek.common.data.models.PersonHelp
+import com.aslnstbk.komek.common.view.OnHelpClickListener
 import com.aslnstbk.komek.common.view.viewHolders.PersonHelpMeViewHolder
 
 class PeopleHelpMeAdapter(
-    private val imageLoader: ImageLoader
+    private val imageLoader: ImageLoader,
+    private val onHelpClickListener: OnHelpClickListener
 ) : RecyclerView.Adapter<PersonHelpMeViewHolder>() {
 
     private val helpList: MutableList<PersonHelp> = mutableListOf()
@@ -37,7 +39,8 @@ class PeopleHelpMeAdapter(
                 parent,
                 false
             ),
-            imageLoader
+            imageLoader,
+            onHelpClickListener
         )
     }
 }

@@ -45,7 +45,6 @@ class HelpNeedFragment(
 
         buildToolbar()
         initViews(view)
-        initListeners()
         observeLiveData()
     }
 
@@ -74,10 +73,11 @@ class HelpNeedFragment(
         sendButton = view.findViewById(R.id.fragment_help_need_send_button)
     }
 
-    private fun initListeners() {
+    private fun initListeners(helpName: String,) {
         sendButton.setOnClickListener {
             helpNeedViewModel.onHelp(
                 helpNeedId = helpNeedId,
+                helpName = helpName,
                 transmissionLetter = transmissionLetterEditText.text.toString()
             )
         }
@@ -101,5 +101,7 @@ class HelpNeedFragment(
             url = helpNeed.ownerPhotoUrl,
             target = userPhotoImageView
         )
+
+        initListeners(helpName = helpNeed.title)
     }
 }
