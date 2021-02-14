@@ -12,15 +12,11 @@ import com.aslnstbk.komek.common.data.models.HelpNeed
 import com.aslnstbk.komek.common.data.models.PersonHelp
 import com.aslnstbk.komek.common.domain.ImageLoader
 import com.aslnstbk.komek.common.view.OnHelpClickListener
-import com.aslnstbk.komek.common.view.ToolbarBuilder
 import com.aslnstbk.komek.common.view.adapters.HelpNeedPeopleAdapter
 import com.aslnstbk.komek.common.view.adapters.PeopleHelpMeAdapter
 import com.aslnstbk.komek.home.presentation.viewModel.HomeViewModel
-import com.aslnstbk.komek.main.presentation.APP_ACTIVITY
 import com.aslnstbk.komek.navigation.Screens
-import com.aslnstbk.komek.utils.show
 import com.github.terrakok.cicerone.Router
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -66,10 +62,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), OnHelpClickListener {
     }
 
     private fun initViews(view: View) {
-        ToolbarBuilder().hide()
-        val bottomNavigationView: BottomNavigationView = APP_ACTIVITY.findViewById(R.id.activity_main_bottom_navigation_view)
-        bottomNavigationView.show()
-
         askHelpButton = view.findViewById(R.id.fragment_home_ask_help_button)
         horizontalHelpListView = view.findViewById(R.id.fragment_home_horizontal_help_list)
         recyclerView = horizontalHelpListView.findViewById(R.id.horizontal_help_list_recycler_view)

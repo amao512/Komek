@@ -35,7 +35,7 @@ class AuthViewModel(
         authRepository.signIn(
             idToken = idToken,
             onSuccess = {
-                router.replaceScreen(screen = Screens.Profile())
+                router.replaceScreen(screen = Screens.BaseFlow())
             },
             onFail = {}
         )

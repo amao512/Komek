@@ -13,14 +13,10 @@ class MainViewModel(
 
     fun setStartFragment() {
         val screen: FragmentScreen = when (firebaseAuth.currentUser != null) {
-            true -> Screens.Home()
+            true -> Screens.BaseFlow()
             false -> Screens.Auth()
         }
 
         router.replaceScreen(screen)
-    }
-
-    fun selectMenuItem(screen: FragmentScreen) {
-        router.navigateTo(screen)
     }
 }
