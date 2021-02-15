@@ -21,6 +21,7 @@ import com.aslnstbk.komek.common.view.adapters.HelpNeedPeopleAdapter
 import com.aslnstbk.komek.common.view.adapters.PeopleHelpMeAdapter
 import com.aslnstbk.komek.help_list.presentation.viewModel.HelpListViewModel
 import com.aslnstbk.komek.main.presentation.APP_ACTIVITY
+import com.aslnstbk.komek.navigation.NavigationState
 import com.aslnstbk.komek.navigation.Screens
 import com.aslnstbk.komek.utils.hide
 import com.aslnstbk.komek.utils.show
@@ -73,11 +74,15 @@ class HelpListFragment(
     }
 
     override fun onClick(helpNeedId: String) {
-        router.navigateTo(Screens.HelpNeed(helpNeedId))
+        helpListViewModel.setNavigation(
+            NavigationState.HelpNeed(helpNeedId)
+        )
     }
 
     override fun onHelpClick(helpNeedId: String) {
-        router.navigateTo(Screens.HelpNeed(helpNeedId))
+        helpListViewModel.setNavigation(
+            NavigationState.HelpNeed(helpNeedId)
+        )
     }
 
     override fun onApproveClick(personHelp: PersonHelp) {
@@ -100,7 +105,7 @@ class HelpListFragment(
                 .build()
 
             toolbar.setNavigationOnClickListener {
-                router.exit()
+                helpListViewModel.setNavigation(NavigationState.Back)
             }
         }
     }
@@ -130,13 +135,14 @@ class HelpListFragment(
 
     private fun initListeners() {
         titleAndArrowView.setOnClickListener {
-            router.navigateTo(Screens.HelpList(isHorizontal = false))
+            helpListViewModel.setNavigation(NavigationState.HelpList)
         }
     }
 
     private fun observeLiveData() {
-        helpListViewModel.getPeopleHelpMeLiveData().observe(viewLifecycleOwner, ::handlePeopleHelpMe)
-        helpListViewModel.getHelpNeedPeopleLiveData().observe(viewLifecycleOwner, ::handleHelpNeedPeople)
+        helpListViewModel.peopleHelpLiveData.observe(viewLifecycleOwner, ::handlePeopleHelpMe)
+        helpListViewModel.helpNeedPeopleLiveData.observe(viewLifecycleOwner, ::handleHelpNeedPeople)
+        helpListViewModel.navigationLiveData.observe(viewLifecycleOwner, ::handleNavigation)
     }
 
     private fun handlePeopleHelpMe(peopleHelpMe: List<PersonHelp>) {
@@ -157,6 +163,19 @@ class HelpListFragment(
             toolbar.title = getString(R.string.help_need_people)
         } else {
             listTitleTextView.text = getString(R.string.help_need_people)
+        }
+    }
+
+    private fun handleNavigation(navigationState: NavigationState) {
+        when (navigationState) {
+            is NavigationState.Back -> router.exit()
+            is NavigationState.HelpList -> router.navigateTo(
+                Screens.HelpList(isHorizontal = false)
+            )
+            is NavigationState.HelpNeed -> router.navigateTo(
+                Screens.HelpNeed(helpNeedId = navigationState.helpNeedId)
+            )
+            else -> {}
         }
     }
 }

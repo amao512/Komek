@@ -1,12 +1,11 @@
 package com.aslnstbk.komek.ask_help.data
 
 import com.aslnstbk.komek.ask_help.domain.AskHelpRepository
-import com.aslnstbk.komek.common.data.HELP_NEED_REF_DB
 import com.aslnstbk.komek.common.data.models.HelpNeed
-import com.google.firebase.database.FirebaseDatabase
+import com.aslnstbk.komek.common.domain.HelpDataSource
 
 class DefaultAskHelpRepository(
-    private val firebaseDatabase: FirebaseDatabase,
+    private val helpDataSource: HelpDataSource
 ) : AskHelpRepository {
 
     override fun onAskHelp(
@@ -14,13 +13,14 @@ class DefaultAskHelpRepository(
         onSuccess: () -> Unit,
         onFail: () -> Unit
     ) {
-        firebaseDatabase.getReference(HELP_NEED_REF_DB)
-            .child(helpNeed.id)
-            .setValue(helpNeed)
-            .addOnSuccessListener {
+        helpDataSource.createHelpNeed(
+            helpNeed = helpNeed,
+            onSuccess = {
                 onSuccess()
-            }.addOnFailureListener {
+            },
+            onFail = {
                 onFail()
             }
+        )
     }
 }

@@ -10,7 +10,6 @@ val askHelpModule = module {
 
     viewModel {
         AskHelpViewModel(
-            router = get(),
             askHelpRepository = get(),
             firebaseAuth = get()
         )
@@ -18,7 +17,7 @@ val askHelpModule = module {
 
     factory {
         DefaultAskHelpRepository(
-            firebaseDatabase = get()
+            helpDataSource = get()
         ) as AskHelpRepository
     }
 }

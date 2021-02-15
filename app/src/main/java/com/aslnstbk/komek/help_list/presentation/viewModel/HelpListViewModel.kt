@@ -6,21 +6,27 @@ import androidx.lifecycle.ViewModel
 import com.aslnstbk.komek.common.data.models.HelpNeed
 import com.aslnstbk.komek.common.data.models.PersonHelp
 import com.aslnstbk.komek.help_list.domain.HelpListRepository
+import com.aslnstbk.komek.navigation.NavigationState
 
 class HelpListViewModel(
     private val helpListRepository: HelpListRepository
 ) : ViewModel() {
 
-    private val helpNeedPeopleLiveData: MutableLiveData<List<HelpNeed>> = MutableLiveData()
-    private val peopleHelpLiveData: MutableLiveData<List<PersonHelp>> = MutableLiveData()
+    private val _helpNeedPeopleLiveData: MutableLiveData<List<HelpNeed>> = MutableLiveData()
+    private val _peopleHelpLiveData: MutableLiveData<List<PersonHelp>> = MutableLiveData()
+    private val _navigationLiveData: MutableLiveData<NavigationState> = MutableLiveData()
 
-    fun getHelpNeedPeopleLiveData(): LiveData<List<HelpNeed>> = helpNeedPeopleLiveData
-
-    fun getPeopleHelpMeLiveData(): LiveData<List<PersonHelp>> = peopleHelpLiveData
+    val helpNeedPeopleLiveData: LiveData<List<HelpNeed>> = _helpNeedPeopleLiveData
+    val peopleHelpLiveData: LiveData<List<PersonHelp>> = _peopleHelpLiveData
+    val navigationLiveData: LiveData<NavigationState> = _navigationLiveData
 
     fun onStart() {
         getHelpNeedPeople()
         getHelpMePeople()
+    }
+
+    fun setNavigation(navigationState: NavigationState) {
+        _navigationLiveData.value = navigationState
     }
 
     fun onRefuseHelp(personHelp: PersonHelp) {
@@ -46,7 +52,7 @@ class HelpListViewModel(
     private fun getHelpNeedPeople() {
         helpListRepository.getHelpNeedPeople(
             onSuccess = {
-                helpNeedPeopleLiveData.value = it
+                _helpNeedPeopleLiveData.value = it
             },
             onFail = {
 
@@ -58,7 +64,7 @@ class HelpListViewModel(
         helpListRepository.getPeopleHelp(
             onSuccess = {
                 if (it.isNotEmpty()){
-                    peopleHelpLiveData.value = it
+                    _peopleHelpLiveData.value = it
                 }
             },
             onFail = {}

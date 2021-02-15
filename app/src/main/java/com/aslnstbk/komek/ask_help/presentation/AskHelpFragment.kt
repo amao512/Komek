@@ -1,7 +1,9 @@
 package com.aslnstbk.komek.ask_help.presentation
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -10,9 +12,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.aslnstbk.komek.R
 import com.aslnstbk.komek.ask_help.presentation.viewModel.AskHelpViewModel
-import com.aslnstbk.komek.common.data.ProgressState
+import com.aslnstbk.komek.common.data.model.ProgressState
 import com.aslnstbk.komek.common.view.ToolbarBuilder
 import com.aslnstbk.komek.main.presentation.APP_ACTIVITY
+import com.aslnstbk.komek.navigation.NavigationState
 import com.aslnstbk.komek.utils.hide
 import com.aslnstbk.komek.utils.show
 import com.aslnstbk.komek.utils.showToast
@@ -20,7 +23,7 @@ import com.github.terrakok.cicerone.Router
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AskHelpFragment : Fragment(R.layout.fragment_ask_help) {
+class AskHelpFragment : Fragment() {
 
     private val askHelpViewModel: AskHelpViewModel by viewModel()
     private val router: Router by inject()
@@ -31,12 +34,18 @@ class AskHelpFragment : Fragment(R.layout.fragment_ask_help) {
     private lateinit var createButton: Button
     private lateinit var progressBar: ProgressBar
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view: View = inflater.inflate(R.layout.fragment_ask_help, container, false)
 
         buildToolbar()
         initViews(view)
         observeLiveData()
+
+        return view
     }
 
     private fun buildToolbar() {
@@ -48,7 +57,7 @@ class AskHelpFragment : Fragment(R.layout.fragment_ask_help) {
             .build()
 
         toolbar.setNavigationOnClickListener {
-            router.exit()
+            askHelpViewModel.setNavigation(NavigationState.Back)
         }
     }
 
@@ -69,8 +78,9 @@ class AskHelpFragment : Fragment(R.layout.fragment_ask_help) {
     }
 
     private fun observeLiveData() {
-        askHelpViewModel.getEmptyFieldsLiveData().observe(viewLifecycleOwner, ::handleEmptyFields)
-        askHelpViewModel.getProgressLiveData().observe(viewLifecycleOwner, ::handleProgress)
+        askHelpViewModel.emptyFieldsLiveData.observe(viewLifecycleOwner, ::handleEmptyFields)
+        askHelpViewModel.progressLiveData.observe(viewLifecycleOwner, ::handleProgress)
+        askHelpViewModel.navigationLiveData.observe(viewLifecycleOwner, ::handleNavigation)
     }
 
     private fun handleProgress(progressState: ProgressState) {
@@ -89,6 +99,12 @@ class AskHelpFragment : Fragment(R.layout.fragment_ask_help) {
     private fun handleEmptyFields(isEmptyFields: Boolean) {
         when (isEmptyFields) {
             true -> showToast(getString(R.string.toast_message_empty_fields))
+        }
+    }
+
+    private fun handleNavigation(navigationState: NavigationState) {
+        when (navigationState) {
+            is NavigationState.Back -> router.exit()
         }
     }
 }

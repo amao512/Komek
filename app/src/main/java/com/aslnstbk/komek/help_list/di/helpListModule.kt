@@ -16,9 +16,7 @@ val helpListModule = module {
 
     factory {
         DefaultHelpListRepository(
-            firebaseClient = get(),
-            firebaseDatabase = get(),
-            helpNeedMapper = get()
+            helpDataSource = get()
         ) as HelpListRepository
     }
 }

@@ -10,16 +10,13 @@ val helpNeedModule = module {
 
     viewModel {
         HelpNeedViewModel(
-            helpNeedRepository = get(),
-            router = get()
+            helpNeedRepository = get()
         )
     }
 
     factory {
         DefaultHelpNeedRepository(
-            firebaseDatabase = get(),
-            firebaseAuth = get(),
-            helpNeedMapper = get()
+            helpDataSource = get()
         ) as HelpNeedRepository
     }
 }

@@ -8,7 +8,6 @@ val profileModule = module {
 
     viewModel {
         ProfileViewModel(
-            router = get(),
             firebaseAuth = get()
         )
     }

@@ -3,19 +3,19 @@ package com.aslnstbk.komek.profile.presentation.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.aslnstbk.komek.navigation.Screens
-import com.github.terrakok.cicerone.Router
+import com.aslnstbk.komek.navigation.NavigationState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class ProfileViewModel(
-    private val router: Router,
     private val firebaseAuth: FirebaseAuth
 ) : ViewModel() {
 
-    private val profileLiveData: MutableLiveData<FirebaseUser> = MutableLiveData()
+    private val _profileLiveData: MutableLiveData<FirebaseUser> = MutableLiveData()
+    private val _navigationLiveData: MutableLiveData<NavigationState> = MutableLiveData()
 
-    fun getProfileLiveData(): LiveData<FirebaseUser> = profileLiveData
+    val profileLiveData: LiveData<FirebaseUser> = _profileLiveData
+    val navigationLiveData: LiveData<NavigationState> = _navigationLiveData
 
     fun onStart() {
         getCurrentUser()
@@ -23,10 +23,10 @@ class ProfileViewModel(
 
     fun signOut() {
         firebaseAuth.signOut()
-        router.replaceScreen(Screens.Auth())
+        _navigationLiveData.value = NavigationState.Auth
     }
 
     private fun getCurrentUser() {
-        profileLiveData.value = firebaseAuth.currentUser
+        _profileLiveData.value = firebaseAuth.currentUser
     }
 }

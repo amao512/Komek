@@ -8,15 +8,12 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.aslnstbk.komek.R
 import com.aslnstbk.komek.help_list.presentation.HelpListFragment
-import com.aslnstbk.komek.home.presentation.viewModel.HomeViewModel
 import com.aslnstbk.komek.navigation.Screens
 import com.github.terrakok.cicerone.Router
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
-    private val homeViewModel: HomeViewModel by viewModel()
     private val router: Router by inject()
 
     private lateinit var askHelpButton: Button
@@ -30,11 +27,7 @@ class HomeFragment : Fragment() {
 
         initViews(view)
         initListeners()
-        observeLiveData()
-
-        childFragmentManager.beginTransaction()
-            .replace(R.id.fragment_home_help_list_fragment_container, HelpListFragment(true))
-            .commit()
+        initHorizontalList()
 
         return view
     }
@@ -49,6 +42,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun observeLiveData() {
+    private fun initHorizontalList() {
+        childFragmentManager.beginTransaction()
+            .replace(
+                R.id.fragment_home_help_list_fragment_container,
+                HelpListFragment(isHorizontal = true)
+            )
+            .commit()
     }
 }

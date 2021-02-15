@@ -10,15 +10,13 @@ val authModule = module {
 
     viewModel {
         AuthViewModel(
-            router = get(),
             authRepository = get()
         )
     }
 
     factory {
         DefaultAuthRepository(
-            firebaseAuth = get(),
-            firebaseDatabase = get()
+            userDataSource = get()
         ) as AuthRepository
     }
 }

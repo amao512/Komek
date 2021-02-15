@@ -8,7 +8,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.aslnstbk.komek.R
 import com.aslnstbk.komek.common.domain.ImageLoader
+import com.aslnstbk.komek.navigation.NavigationState
+import com.aslnstbk.komek.navigation.Screens
 import com.aslnstbk.komek.profile.presentation.viewModel.ProfileViewModel
+import com.github.terrakok.cicerone.Router
 import com.google.firebase.auth.FirebaseUser
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -16,6 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val profileViewModel: ProfileViewModel by viewModel()
+    private val router: Router by inject()
     private val imageLoader: ImageLoader by inject()
 
     private lateinit var userPhotoImageView: ImageView
@@ -46,7 +50,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun observeLiveData() {
-        profileViewModel.getProfileLiveData().observe(viewLifecycleOwner, ::handleProfile)
+        profileViewModel.profileLiveData.observe(viewLifecycleOwner, ::handleProfile)
+        profileViewModel.navigationLiveData.observe(viewLifecycleOwner, ::handleNavigation)
     }
 
     private fun handleProfile(firebaseUser: FirebaseUser) {
@@ -58,5 +63,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             url = firebaseUser.photoUrl.toString(),
             target = userPhotoImageView
         )
+    }
+
+    private fun handleNavigation(navigationState: NavigationState) {
+        when (navigationState) {
+            is NavigationState.Auth -> router.replaceScreen(Screens.Auth())
+            else -> {}
+        }
     }
 }

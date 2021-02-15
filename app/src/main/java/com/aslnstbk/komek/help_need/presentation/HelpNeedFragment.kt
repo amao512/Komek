@@ -17,6 +17,7 @@ import com.aslnstbk.komek.common.view.viewHolders.FREE_PRICE_TEXT
 import com.aslnstbk.komek.common.view.viewHolders.PRICE_TEXT_FORMAT
 import com.aslnstbk.komek.help_need.presentation.viewModel.HelpNeedViewModel
 import com.aslnstbk.komek.main.presentation.APP_ACTIVITY
+import com.aslnstbk.komek.navigation.NavigationState
 import com.github.terrakok.cicerone.Router
 import de.hdodenhof.circleimageview.CircleImageView
 import org.koin.android.ext.android.inject
@@ -59,7 +60,7 @@ class HelpNeedFragment(
             .build()
 
         toolbar.setNavigationOnClickListener {
-            router.exit()
+            helpNeedViewModel.setNavigation(NavigationState.Back)
         }
     }
 
@@ -73,7 +74,7 @@ class HelpNeedFragment(
         sendButton = view.findViewById(R.id.fragment_help_need_send_button)
     }
 
-    private fun initListeners(helpName: String,) {
+    private fun initListeners(helpName: String) {
         sendButton.setOnClickListener {
             helpNeedViewModel.onHelp(
                 helpNeedId = helpNeedId,
@@ -85,6 +86,7 @@ class HelpNeedFragment(
 
     private fun observeLiveData() {
         helpNeedViewModel.helpNeedLiveData.observe(viewLifecycleOwner, ::handleHelpNeed)
+        helpNeedViewModel.navigationLiveData.observe(viewLifecycleOwner, ::handleNavigation)
     }
 
     private fun handleHelpNeed(helpNeed: HelpNeed) {
@@ -103,5 +105,12 @@ class HelpNeedFragment(
         )
 
         initListeners(helpName = helpNeed.title)
+    }
+
+    private fun handleNavigation(navigationState: NavigationState?) {
+        when (navigationState) {
+            is NavigationState.Back -> router.exit()
+            else -> {}
+        }
     }
 }

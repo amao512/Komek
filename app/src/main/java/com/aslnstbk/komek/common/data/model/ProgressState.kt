@@ -1,4 +1,4 @@
-package com.aslnstbk.komek.common.data
+package com.aslnstbk.komek.common.data.model
 
 sealed class ProgressState {
     object Loading: ProgressState()

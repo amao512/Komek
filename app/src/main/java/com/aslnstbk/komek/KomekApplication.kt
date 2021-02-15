@@ -9,7 +9,6 @@ import com.aslnstbk.komek.di.mappersModule
 import com.aslnstbk.komek.di.navigationModule
 import com.aslnstbk.komek.help_list.di.helpListModule
 import com.aslnstbk.komek.help_need.di.helpNeedModule
-import com.aslnstbk.komek.home.di.homeModule
 import com.aslnstbk.komek.main.di.mainModule
 import com.aslnstbk.komek.profile.di.profileModule
 import com.github.terrakok.cicerone.Cicerone
@@ -40,7 +39,6 @@ class KomekApplication : Application() {
                 mappersModule,
                 mainModule,
                 authModule,
-                homeModule,
                 profileModule,
                 askHelpModule,
                 helpListModule,

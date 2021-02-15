@@ -1,8 +1,8 @@
-package com.aslnstbk.komek.auth.domain
+package com.aslnstbk.komek.common.domain
 
 import android.content.Intent
 
-interface AuthRepository {
+interface UserDataSource {
 
     fun signIn(
         data: Intent?,
