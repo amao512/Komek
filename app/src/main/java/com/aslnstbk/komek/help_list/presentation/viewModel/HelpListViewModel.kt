@@ -14,15 +14,18 @@ class HelpListViewModel(
 
     private val _helpNeedPeopleLiveData: MutableLiveData<List<HelpNeed>> = MutableLiveData()
     private val _peopleHelpLiveData: MutableLiveData<List<PersonHelp>> = MutableLiveData()
+    private val _approvedPersonHelpLiveData: MutableLiveData<PersonHelp> = MutableLiveData()
     private val _navigationLiveData: MutableLiveData<NavigationState> = MutableLiveData()
 
     val helpNeedPeopleLiveData: LiveData<List<HelpNeed>> = _helpNeedPeopleLiveData
     val peopleHelpLiveData: LiveData<List<PersonHelp>> = _peopleHelpLiveData
+    val approvedPersonHelpLiveData: LiveData<PersonHelp> = _approvedPersonHelpLiveData
     val navigationLiveData: LiveData<NavigationState> = _navigationLiveData
 
     fun onStart() {
-        getHelpNeedPeople()
         getHelpMePeople()
+        getHelpNeedPeople()
+        getApprovedPersonHelp()
     }
 
     fun setNavigation(navigationState: NavigationState) {
@@ -32,17 +35,17 @@ class HelpListViewModel(
     fun onRefuseHelp(personHelp: PersonHelp) {
         personHelp.isRefuse = true
 
-        helpListRepository.changePersonHelpValue(
+        helpListRepository.refusePersonHelp(
             personHelp = personHelp,
             onSuccess = {},
             onFail = {}
         )
     }
 
-    fun onApproveHelp(personHelp: PersonHelp) {
-        personHelp.isHelp = true
+    fun onDoneHelp(personHelp: PersonHelp) {
+        personHelp.isDone = true
 
-        helpListRepository.changePersonHelpValue(
+        helpListRepository.donePersonHelp(
             personHelp = personHelp,
             onSuccess = {},
             onFail = {}
@@ -52,11 +55,11 @@ class HelpListViewModel(
     private fun getHelpNeedPeople() {
         helpListRepository.getHelpNeedPeople(
             onSuccess = {
-                _helpNeedPeopleLiveData.value = it
+                if (it.isNotEmpty()) {
+                    _helpNeedPeopleLiveData.value = it
+                }
             },
-            onFail = {
-
-            }
+            onFail = {}
         )
     }
 
@@ -66,6 +69,15 @@ class HelpListViewModel(
                 if (it.isNotEmpty()){
                     _peopleHelpLiveData.value = it
                 }
+            },
+            onFail = {}
+        )
+    }
+
+    private fun getApprovedPersonHelp() {
+        helpListRepository.getApprovedPersonHelp(
+            onSuccess = {
+                _approvedPersonHelpLiveData.value = it
             },
             onFail = {}
         )

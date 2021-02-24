@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import com.aslnstbk.komek.common.data.models.HelpNeed
 import com.aslnstbk.komek.common.data.models.PersonHelp
 import com.aslnstbk.komek.common.domain.ImageLoader
 import com.aslnstbk.komek.common.view.OnHelpClickListener
+import com.aslnstbk.komek.common.view.PersonHelpView
 import com.aslnstbk.komek.common.view.ToolbarBuilder
 import com.aslnstbk.komek.common.view.adapters.HelpNeedPeopleAdapter
 import com.aslnstbk.komek.common.view.adapters.PeopleHelpMeAdapter
@@ -55,6 +57,7 @@ class HelpListFragment(
     private lateinit var helpListRecyclerView: RecyclerView
     private lateinit var titleAndArrowView: LinearLayout
     private lateinit var listTitleTextView: TextView
+    private lateinit var personHelpView: PersonHelpView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,17 +83,19 @@ class HelpListFragment(
     }
 
     override fun onHelpClick(helpNeedId: String) {
-        helpListViewModel.setNavigation(
-            NavigationState.HelpNeed(helpNeedId)
-        )
+        router.navigateTo(Screens.HelpNeed(helpNeedId))
     }
 
     override fun onApproveClick(personHelp: PersonHelp) {
-        helpListViewModel.onApproveHelp(personHelp)
+        router.navigateTo(Screens.PersonHelp(personHelp))
     }
 
     override fun onRefuseClick(personHelp: PersonHelp) {
         helpListViewModel.onRefuseHelp(personHelp)
+    }
+
+    override fun onDoneClick(personHelp: PersonHelp) {
+        helpListViewModel.onDoneHelp(personHelp)
     }
 
     private fun buildToolbar() {
@@ -111,6 +116,7 @@ class HelpListFragment(
     }
 
     private fun initViews(view: View) {
+        personHelpView = view.findViewById(R.id.fragment_help_list_person_help_view)
         helpListRecyclerView = view.findViewById(R.id.fragment_help_list_recycler_view)
         titleAndArrowView = view.findViewById(R.id.fragment_help_list_title_and_arrow)
         listTitleTextView = view.findViewById(R.id.fragment_help_list_title)
@@ -142,6 +148,7 @@ class HelpListFragment(
     private fun observeLiveData() {
         helpListViewModel.peopleHelpLiveData.observe(viewLifecycleOwner, ::handlePeopleHelpMe)
         helpListViewModel.helpNeedPeopleLiveData.observe(viewLifecycleOwner, ::handleHelpNeedPeople)
+        helpListViewModel.approvedPersonHelpLiveData.observe(viewLifecycleOwner, ::handleApprovedPersonHelp)
         helpListViewModel.navigationLiveData.observe(viewLifecycleOwner, ::handleNavigation)
     }
 
@@ -154,6 +161,8 @@ class HelpListFragment(
         } else {
             listTitleTextView.text = getString(R.string.people_help_you)
         }
+
+        Toast.makeText(APP_ACTIVITY.applicationContext, "People help me", Toast.LENGTH_SHORT).show()
     }
 
     private fun handleHelpNeedPeople(helpNeedPeople: List<HelpNeed>) {
@@ -164,6 +173,17 @@ class HelpListFragment(
         } else {
             listTitleTextView.text = getString(R.string.help_need_people)
         }
+
+        Toast.makeText(APP_ACTIVITY.applicationContext, "Help need people", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun handleApprovedPersonHelp(personHelp: PersonHelp) {
+        personHelpView.fillData(personHelp)
+        personHelpView.setOnClickListener(personHelp, onHelpClickListener = this)
+        personHelpView.show()
+        helpListRecyclerView.hide()
+
+        Toast.makeText(APP_ACTIVITY.applicationContext, "Approve person help", Toast.LENGTH_SHORT).show()
     }
 
     private fun handleNavigation(navigationState: NavigationState) {
@@ -171,9 +191,6 @@ class HelpListFragment(
             is NavigationState.Back -> router.exit()
             is NavigationState.HelpList -> router.navigateTo(
                 Screens.HelpList(isHorizontal = false)
-            )
-            is NavigationState.HelpNeed -> router.navigateTo(
-                Screens.HelpNeed(helpNeedId = navigationState.helpNeedId)
             )
             else -> {}
         }

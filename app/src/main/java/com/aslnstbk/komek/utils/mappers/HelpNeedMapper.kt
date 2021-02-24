@@ -10,7 +10,19 @@ class HelpNeedMapper {
         val peopleHelp: MutableList<PersonHelp> = mutableListOf()
 
         snapshot.child("peopleHelp").children.forEach {
-            peopleHelp.add(it.getValue(PersonHelp::class.java)!!)
+            peopleHelp.add(
+                PersonHelp(
+                    id = it.child("id").value as String,
+                    helpNeedId = it.child("helpNeedId").value as String,
+                    userName = it.child("userName").value as String,
+                    userPhoto = it.child("userPhoto").value as String,
+                    helpName = it.child("helpName").value as String,
+                    transmissionLetter = it.child("transmissionLetter").value as String,
+                    isHelp = it.child("help").value as Boolean,
+                    isRefuse = it.child("refuse").value as Boolean,
+                    isDone = it.child("done").value as Boolean
+                )
+            )
         }
 
         return HelpNeed(
@@ -23,7 +35,19 @@ class HelpNeedMapper {
             isHelp = snapshot.child("help").value as Boolean,
             isDone = snapshot.child("done").value as Boolean,
             personHelpId = snapshot.child("personHelpId").value as String,
-            peopleHelp = peopleHelp
+            peopleHelp = checkPeopleHelp(peopleHelp)
         )
+    }
+
+    private fun checkPeopleHelp(peopleHelp: List<PersonHelp>): List<PersonHelp> {
+        val checkedPeopleHelp: MutableList<PersonHelp> = mutableListOf()
+
+        peopleHelp.map {
+            if (!it.isDone) {
+                checkedPeopleHelp.add(it)
+            }
+        }
+
+        return checkedPeopleHelp
     }
 }

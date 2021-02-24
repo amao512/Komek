@@ -1,11 +1,14 @@
 package com.aslnstbk.komek.help_need.data
 
 import com.aslnstbk.komek.common.data.models.HelpNeed
-import com.aslnstbk.komek.common.domain.HelpDataSource
+import com.aslnstbk.komek.common.data.models.PersonHelp
+import com.aslnstbk.komek.common.domain.PeopleHelpDataSource
+import com.aslnstbk.komek.common.domain.HelpNeedDataSource
 import com.aslnstbk.komek.help_need.domain.HelpNeedRepository
 
 class DefaultHelpNeedRepository(
-    private val helpDataSource: HelpDataSource
+    private val peopleHelpDataSource: PeopleHelpDataSource,
+    private val helpNeedDataSource: HelpNeedDataSource
 ) : HelpNeedRepository {
 
     override fun getHelpNeed(
@@ -13,7 +16,7 @@ class DefaultHelpNeedRepository(
         onSuccess: (HelpNeed) -> Unit,
         onFail: () -> Unit
     ) {
-        helpDataSource.getHelpNeed(
+        helpNeedDataSource.getHelpNeed(
             helpNeedId = helpNeedId,
             onSuccess = {
                 onSuccess(it)
@@ -25,16 +28,12 @@ class DefaultHelpNeedRepository(
     }
 
     override fun onHelp(
-        helpNeedId: String,
-        helpName: String,
-        transmissionLetter: String,
+        personHelp: PersonHelp,
         onSuccess: () -> Unit,
         onFail: () -> Unit
     ) {
-        helpDataSource.createPersonHelp(
-            helpNeedId = helpNeedId,
-            helpName = helpName,
-            transmissionLetter = transmissionLetter,
+        peopleHelpDataSource.createPersonHelp(
+            personHelp = personHelp,
             onSuccess = {
                 onSuccess()
             },

@@ -11,4 +11,6 @@ interface OnHelpClickListener {
     fun onApproveClick(personHelp: PersonHelp)
 
     fun onRefuseClick(personHelp: PersonHelp)
+
+    fun onDoneClick(personHelp: PersonHelp)
 }

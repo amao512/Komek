@@ -16,7 +16,8 @@ val helpListModule = module {
 
     factory {
         DefaultHelpListRepository(
-            helpDataSource = get()
+            peopleHelpDataSource = get(),
+            helpNeedDataSource = get()
         ) as HelpListRepository
     }
 }

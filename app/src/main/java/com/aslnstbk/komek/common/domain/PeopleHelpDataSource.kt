@@ -1,22 +1,29 @@
-package com.aslnstbk.komek.help_list.domain
+package com.aslnstbk.komek.common.domain
 
-import com.aslnstbk.komek.common.data.models.HelpNeed
 import com.aslnstbk.komek.common.data.models.PersonHelp
 
-interface HelpListRepository {
+interface PeopleHelpDataSource {
 
-    fun getApprovedPersonHelp(
+    fun createPersonHelp(
+        personHelp: PersonHelp,
+        onSuccess: () -> Unit,
+        onFail: () -> Unit
+    )
+
+    fun getPersonHelp(
+        personHelpId: String,
+        helpNeedId: String,
+        onSuccess: (PersonHelp) -> Unit,
+        onFail: () -> Unit
+    )
+
+    fun getApprovePersonHelp(
         onSuccess: (PersonHelp) -> Unit,
         onFail: () -> Unit
     )
 
     fun getPeopleHelp(
         onSuccess: (List<PersonHelp>) -> Unit,
-        onFail: () -> Unit
-    )
-
-    fun getHelpNeedPeople(
-        onSuccess: (List<HelpNeed>) -> Unit,
         onFail: () -> Unit
     )
 

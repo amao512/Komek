@@ -2,10 +2,10 @@ package com.aslnstbk.komek.ask_help.data
 
 import com.aslnstbk.komek.ask_help.domain.AskHelpRepository
 import com.aslnstbk.komek.common.data.models.HelpNeed
-import com.aslnstbk.komek.common.domain.HelpDataSource
+import com.aslnstbk.komek.common.domain.HelpNeedDataSource
 
 class DefaultAskHelpRepository(
-    private val helpDataSource: HelpDataSource
+    private val helpNeedDataSource: HelpNeedDataSource,
 ) : AskHelpRepository {
 
     override fun onAskHelp(
@@ -13,7 +13,7 @@ class DefaultAskHelpRepository(
         onSuccess: () -> Unit,
         onFail: () -> Unit
     ) {
-        helpDataSource.createHelpNeed(
+        helpNeedDataSource.createHelpNeed(
             helpNeed = helpNeed,
             onSuccess = {
                 onSuccess()

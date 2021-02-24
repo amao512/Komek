@@ -17,7 +17,7 @@ val askHelpModule = module {
 
     factory {
         DefaultAskHelpRepository(
-            helpDataSource = get()
+            helpNeedDataSource = get()
         ) as AskHelpRepository
     }
 }

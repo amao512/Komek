@@ -39,11 +39,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_help_list_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:overScrollMode="never"
         android:scrollbars="none"
         tools:listitem="@layout/person_help_me_item"
+        />
+
+    <com.aslnstbk.komek.common.view.PersonHelpView
+        android:id="@+id/fragment_help_list_person_help_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
         />
 
 </LinearLayout>

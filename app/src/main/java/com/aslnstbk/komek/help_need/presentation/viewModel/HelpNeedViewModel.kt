@@ -3,12 +3,16 @@ package com.aslnstbk.komek.help_need.presentation.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.aslnstbk.komek.common.data.EMPTY_STRING
 import com.aslnstbk.komek.common.data.models.HelpNeed
+import com.aslnstbk.komek.common.data.models.PersonHelp
 import com.aslnstbk.komek.help_need.domain.HelpNeedRepository
 import com.aslnstbk.komek.navigation.NavigationState
+import com.google.firebase.auth.FirebaseAuth
 
 class HelpNeedViewModel(
-    private val helpNeedRepository: HelpNeedRepository
+    private val helpNeedRepository: HelpNeedRepository,
+    private val firebaseAuth: FirebaseAuth,
 ) : ViewModel() {
 
     private val _helpNeedLiveData: MutableLiveData<HelpNeed> = MutableLiveData()
@@ -26,10 +30,18 @@ class HelpNeedViewModel(
         helpName: String,
         transmissionLetter: String,
     ) {
-        helpNeedRepository.onHelp(
+        val currentUser = firebaseAuth.currentUser!!
+        val personHelp = PersonHelp(
+            id = currentUser.uid,
             helpNeedId = helpNeedId,
             helpName = helpName,
-            transmissionLetter = transmissionLetter,
+            userName = currentUser.displayName ?: EMPTY_STRING,
+            userPhoto = currentUser.photoUrl.toString(),
+            transmissionLetter = transmissionLetter
+        )
+
+        helpNeedRepository.onHelp(
+            personHelp = personHelp,
             onSuccess = {
                 _navigationLiveData.value = NavigationState.Back
             },

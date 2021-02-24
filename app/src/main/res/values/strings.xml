@@ -31,4 +31,5 @@
     <string name="button_refuse">Refuse</string>
     <string name="button_approve">Approve</string>
     <string name="text_view_refused">Refused</string>
+    <string name="button_done">Done</string>
 </resources>

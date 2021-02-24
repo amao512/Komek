@@ -9,73 +9,14 @@
     tools:context=".help_need.presentation.HelpNeedFragment"
     >
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/fragment_help_need_user_photo"
-        android:layout_width="@dimen/person_card_photo_size"
-        android:layout_height="@dimen/person_card_photo_size"
-        app:layout_constraintBottom_toTopOf="@id/fragment_help_need_title"
-        app:layout_constraintEnd_toStartOf="@id/fragment_help_need_user_name_text_view"
-        app:layout_constraintStart_toStartOf="parent"
+    <com.aslnstbk.komek.common.view.HelpInfoView
+        android:id="@+id/fragment_help_need_help_info_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/fragment_help_need_user_name_text_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_size_16x"
-        android:layout_marginEnd="@dimen/margin_size_10x"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_18x"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_help_need_user_photo"
-        app:layout_constraintEnd_toStartOf="@id/fragment_help_need_price_text_view"
-        app:layout_constraintStart_toEndOf="@id/fragment_help_need_user_photo"
-        app:layout_constraintTop_toTopOf="@id/fragment_help_need_user_photo"
-        tools:text="username"
-        />
-
-    <TextView
-        android:id="@+id/fragment_help_need_price_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_size_18x"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_help_need_user_photo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/fragment_help_need_user_name_text_view"
-        app:layout_constraintTop_toTopOf="@id/fragment_help_need_user_photo"
-        tools:text="5000 KZT"
-        />
-
-    <TextView
-        android:id="@+id/fragment_help_need_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_size_16x"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_size_18x"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/fragment_help_need_desc_text_view"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_help_need_user_photo"
-        tools:text="Title"
-        />
-
-    <TextView
-        android:id="@+id/fragment_help_need_desc_text_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_size_8x"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_16x"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/fragment_help_need_helping_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_help_need_title"
-        tools:text="I need help!"
         />
 
     <LinearLayout
@@ -87,7 +28,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_help_need_desc_text_view"
+        app:layout_constraintTop_toBottomOf="@id/fragment_help_need_help_info_view"
         >
 
         <TextView

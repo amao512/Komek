@@ -2,24 +2,32 @@ package com.aslnstbk.komek.help_list.data
 
 import com.aslnstbk.komek.common.data.models.HelpNeed
 import com.aslnstbk.komek.common.data.models.PersonHelp
-import com.aslnstbk.komek.common.domain.HelpDataSource
+import com.aslnstbk.komek.common.domain.PeopleHelpDataSource
+import com.aslnstbk.komek.common.domain.HelpNeedDataSource
 import com.aslnstbk.komek.help_list.domain.HelpListRepository
 
 class DefaultHelpListRepository(
-    private val helpDataSource: HelpDataSource
+    private val peopleHelpDataSource: PeopleHelpDataSource,
+    private val helpNeedDataSource: HelpNeedDataSource
 ) : HelpListRepository {
+
+    override fun getApprovedPersonHelp(
+        onSuccess: (PersonHelp) -> Unit,
+        onFail: () -> Unit
+    ) {
+        peopleHelpDataSource.getApprovePersonHelp(
+            onSuccess = onSuccess,
+            onFail = onFail
+        )
+    }
 
     override fun getPeopleHelp(
         onSuccess: (List<PersonHelp>) -> Unit,
         onFail: () -> Unit
     ) {
-        helpDataSource.getPeopleHelp(
-            onSuccess = {
-                onSuccess(it)
-            },
-            onFail = {
-                onFail()
-            }
+        peopleHelpDataSource.getPeopleHelp(
+            onSuccess = onSuccess,
+            onFail = onFail
         )
     }
 
@@ -27,29 +35,45 @@ class DefaultHelpListRepository(
         onSuccess: (List<HelpNeed>) -> Unit,
         onFail: () -> Unit
     ) {
-        helpDataSource.getHelpNeedPeople(
-            onSuccess = {
-                onSuccess(it)
-            },
-            onFail = {
-                onFail()
-            }
+        helpNeedDataSource.getHelpNeedPeople(
+            onSuccess = onSuccess,
+            onFail = onFail
         )
     }
 
-    override fun changePersonHelpValue(
+    override fun refusePersonHelp(
         personHelp: PersonHelp,
         onSuccess: () -> Unit,
         onFail: () -> Unit
     ) {
-        helpDataSource.updatePersonHelp(
+        peopleHelpDataSource.refusePersonHelp(
             personHelp = personHelp,
-            onSuccess = {
-                onSuccess()
-            },
-            onFail = {
-                onFail()
-            }
+            onSuccess = onSuccess,
+            onFail = onFail
+        )
+    }
+
+    override fun approvePersonHelp(
+        personHelp: PersonHelp,
+        onSuccess: () -> Unit,
+        onFail: () -> Unit
+    ) {
+        peopleHelpDataSource.approvePersonHelp(
+            personHelp = personHelp,
+            onSuccess = onSuccess,
+            onFail = onFail
+        )
+    }
+
+    override fun donePersonHelp(
+        personHelp: PersonHelp,
+        onSuccess: () -> Unit,
+        onFail: () -> Unit
+    ) {
+        peopleHelpDataSource.donePersonHelp(
+            personHelp = personHelp,
+            onSuccess = onSuccess,
+            onFail = onFail
         )
     }
 }

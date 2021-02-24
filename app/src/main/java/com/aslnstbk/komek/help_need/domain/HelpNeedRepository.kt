@@ -1,6 +1,7 @@
 package com.aslnstbk.komek.help_need.domain
 
 import com.aslnstbk.komek.common.data.models.HelpNeed
+import com.aslnstbk.komek.common.data.models.PersonHelp
 
 interface HelpNeedRepository {
 
@@ -11,9 +12,7 @@ interface HelpNeedRepository {
     )
 
     fun onHelp(
-        helpNeedId: String,
-        helpName: String,
-        transmissionLetter: String,
+        personHelp: PersonHelp,
         onSuccess: () -> Unit,
         onFail: () -> Unit
     )

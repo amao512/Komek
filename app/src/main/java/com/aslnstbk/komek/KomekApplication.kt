@@ -10,6 +10,7 @@ import com.aslnstbk.komek.di.navigationModule
 import com.aslnstbk.komek.help_list.di.helpListModule
 import com.aslnstbk.komek.help_need.di.helpNeedModule
 import com.aslnstbk.komek.main.di.mainModule
+import com.aslnstbk.komek.person_help.di.personHelpModule
 import com.aslnstbk.komek.profile.di.profileModule
 import com.github.terrakok.cicerone.Cicerone
 import com.google.firebase.FirebaseApp
@@ -42,7 +43,8 @@ class KomekApplication : Application() {
                 profileModule,
                 askHelpModule,
                 helpListModule,
-                helpNeedModule
+                helpNeedModule,
+                personHelpModule
             )
         }
     }

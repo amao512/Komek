@@ -8,8 +8,8 @@ data class HelpNeed(
     val title: String = "",
     val desc: String = "",
     val price: String = "",
-    val isHelp: Boolean = false,
-    val isDone: Boolean = false,
+    var isHelp: Boolean = false,
+    var isDone: Boolean = false,
     val personHelpId: String = "",
     val peopleHelp: List<PersonHelp> = emptyList()
 )

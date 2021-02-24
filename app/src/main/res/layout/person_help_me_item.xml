@@ -87,6 +87,20 @@
         app:layout_constraintTop_toBottomOf="@id/person_help_me_item_transmission_letter"
         />
 
+    <Button
+        android:id="@+id/person_help_me_item_done_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_size_10x"
+        android:layout_marginTop="@dimen/margin_size_10x"
+        android:text="@string/button_done"
+        android:textAllCaps="false"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/person_help_me_item_refuse_button"
+        app:layout_constraintTop_toBottomOf="@id/person_help_me_item_transmission_letter"
+        />
+
     <TextView
         android:id="@+id/person_help_me_item_refused_text_view"
         android:layout_width="wrap_content"
